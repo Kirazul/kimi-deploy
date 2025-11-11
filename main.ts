@@ -5,9 +5,14 @@ import { load } from "https://deno.land/std@0.224.0/dotenv/mod.ts";
 
 // --- 1. Configuration Module (equivalent to app/core/config.py and .env) ---
 
-// Dynamically load environment variables from .env file
-// Using `deno run --load` flag at startup is more modern, but this provides in-code loading as backup
-await load({ export: true });
+// Dynamically load environment variables from .env file (for local development only)
+// In production (Deno Deploy), environment variables are set via the dashboard
+try {
+  await load({ export: true });
+} catch {
+  // Ignore error if .env file doesn't exist (production environment)
+  console.info("No .env file found, using environment variables from system");
+}
 
 const settings = {
   APP_NAME: "kimi-ai-2api-deno",

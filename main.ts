@@ -1,18 +1,9 @@
-// main.ts (v1.1 - Syntax errors fixed)
-
-// Import necessary modules from Deno standard library
-import { load } from "https://deno.land/std@0.224.0/dotenv/mod.ts";
+// main.ts (v1.2 - Deno Deploy compatible)
 
 // --- 1. Configuration Module (equivalent to app/core/config.py and .env) ---
-
-// Dynamically load environment variables from .env file (for local development only)
-// In production (Deno Deploy), environment variables are set via the dashboard
-try {
-  await load({ export: true, examplePath: null });
-} catch {
-  // Ignore error if .env file doesn't exist (production environment)
-  console.info("No .env file found, using environment variables from system");
-}
+// Environment variables are read directly from Deno.env
+// For local development, use: deno run --env-file=.env ...
+// For Deno Deploy, set environment variables in the dashboard
 
 const settings = {
   APP_NAME: "kimi-ai-2api-deno",

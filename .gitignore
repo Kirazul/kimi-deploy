@@ -1,5 +1,4 @@
-# Environment variables
-.env
+# Environment variables (local overrides only)
 .env.local
 .env.production
 
